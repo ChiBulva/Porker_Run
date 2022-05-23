@@ -1,0 +1,115 @@
+<!--
+    Wait.... You're actually looking at my code........ Thank you!!!!
+    Hopefully everything is easy to find. My goal was to have this site completely hosted on github for free.
+    My custom made css templete follows my own website design methods. These methods are based on percentages.
+    To do this I emplemented a series of clickable items that would lead to each scene. This is controlled by conditionals in the <script> tag
+    If you would like to colaberate...
+    Email me at:
+        travis.c.j.gray@gmail.com
+    with subject 'CONCATINATE'
+
+    Navigate to:
+        127.0.0.1:5000/
+
+-->
+
+<html class="g-FlexFit">
+<head>
+    <title>
+        {{Title}}
+    </title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/Logo.jpg') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/GrayPry_Globals.css') }}">
+
+    <!-- Local css -->
+
+  		<!-- Local JQuery and bootstrap -->
+  		<script type="text/javascript" src="{{ url_for('static', filename='JavaScript/JQuery/jquery.js') }}"></script>
+  		<script type="text/javascript" src="{{ url_for('static', filename='JavaScript/JQuery/jquery-ui.js') }}"></script>
+  		<!-- <script type="text/javascript" src="{{ url_for('static', filename='JavaScript/Bootstrap/popper.js') }}"></script> -->
+  		<!-- <script type="text/javascript" src="{{ url_for('static', filename='JavaScript/Bootstrap/bootstrap.js') }}"></script> -->
+
+  		<!-- Local Javasript -->
+      <script type="text/javascript" src="{{ url_for('static', filename='JavaScript/global.js') }}"></script>
+
+    <style>
+    </style>
+
+</head>
+<body class="g-FlexFit  g-century-gothic bg ">
+
+    <div class="g-height100 g-width100 {{ Colors['Primary'] }} g-centered-text">
+
+        <!-- Logo Section -->
+        <div class="g-height100 g-width100">
+            <!-- Logo grabbed from 'Pictures' Folder -->
+            <img class="g-height100 g-FL" src="{{url_for('static', filename='images/Logo.jpg')}}" alt="Logo">
+            <div class="g-height100 g-width100 g-FL" style="position:absolute">
+                <div class="g-height10 g-width10 g-FL">
+                    <!-- Buffer Top -->
+                </div>
+                <div class="g-height50 g-width100 g-FL">
+                    <div class="g-height100 g-width10 g-FL">
+                        <!-- Buffer Left -->
+                    </div>
+                    <div class="g-height100 g-width80 g-FL g-scroll-a">
+						
+
+                <div class="g-height25 g-width100  g-FL">
+                    <!-- Go To: Player_Input -->
+                    <div class="g-height50 g-width100  g-FL">
+                        <form action="/Player_Input">
+                            <button class="g-FlexFit {{ Colors['Button_Next'] }}" type="submit">
+                                Player_Input
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="g-height25 g-width100  g-FL">
+                    <!-- Go To: Add_Cards -->
+                    <div class="g-height50 g-width100  g-FL">
+                        <form action="/Add_Cards">
+                            <button class="g-FlexFit {{ Colors['Button_Next'] }}" type="submit">
+                                Add_Cards
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="g-height25 g-width100  g-FL">
+                    <!-- Go To: Results -->
+                    <div class="g-height50 g-width100  g-FL">
+                        <form action="/Results">
+                            <button class="g-FlexFit {{ Colors['Button_Next'] }}" type="submit">
+                                Results
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                    </div>
+                    <div class="g-height100 g-width10  g-FL">
+                        <!-- Buffer Right -->
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+                    // Local Javascript
+    </script>
+
+</body>
+</html>
