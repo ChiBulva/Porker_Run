@@ -1135,6 +1135,10 @@ button {
     color: blue;
 }
 
+.g-text-yellow {
+    color: yellow;
+}
+
 .g-text-babyblue {
     color: rgb(46, 185, 229);
 }

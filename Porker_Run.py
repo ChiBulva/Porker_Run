@@ -17,6 +17,7 @@ import multiprocessing
 
 #import scripts.Example.Example_Script as Example_Script
 #<++| Import Hooks |++>
+import scripts.File_IO.JSON_Functions.JSON_Functions as JSON_Functions
 
 #
 #\
@@ -104,6 +105,74 @@ def Sample_Post(  ):
     return "Error"
 """
 
+@app.route("/Add_Hand", methods=['POST'])
+def Add_Hand(  ):
+    print( "---- Add_Hand( ) Start ----" )
+
+    if request.method == "POST":
+        print( "Add_Hand" )
+
+        JSON_Info = request.get_json()
+        print( JSON_Info )
+        #ARG_Info = request.args.to_dict()
+        return JSON_Functions.Add_Hand( JSON_Info[ "Player_Name" ] )
+
+    return "Error"
+
+@app.route("/Paid_Toggle", methods=['POST'])
+def Paid_Toggle(  ):
+    print( "---- Paid_Toggle( ) Start ----" )
+
+    if request.method == "POST":
+        print( "Paid_Toggle" )
+
+        JSON_Info = request.get_json()
+        print( JSON_Info )
+        #ARG_Info = request.args.to_dict()
+        return JSON_Functions.Paid_Toggle( JSON_Info[ "Player_Name" ] )
+
+    return "Error"
+
+@app.route("/Add_Player", methods=['POST'])
+def Add_Player(  ):
+    print( "---- Add_Player( ) Start ----" )
+
+    if request.method == "POST":
+        print( "Player_Name" )
+
+        JSON_Info = request.get_json()
+        print( JSON_Info )
+        #ARG_Info = request.args.to_dict()
+        return JSON_Functions.Add_Player( JSON_Info[ "Player_Name" ], JSON_Info[ "Paid" ] )
+
+    return "Error"
+
+@app.route("/Remove_Player", methods=['POST'])
+def Remove_Player(  ):
+    print( "---- Remove_Player( ) Start ----" )
+
+    if request.method == "POST":
+        print( "Player_Name" )
+
+        JSON_Info = request.get_json()
+        print( JSON_Info )
+        #ARG_Info = request.args.to_dict()
+        return JSON_Functions.Remove_Player( JSON_Info[ "Player_Name" ] )
+
+    return "Error"
+
+@app.route("/Get_Players", methods=['POST'])
+def Get_Players(  ):
+    print( "---- Get_Players( ) Start ----" )
+
+    if request.method == "POST":
+        Players = JSON_Functions.Get_Players(  )
+        print( Players )
+        #ARG_Info = request.args.to_dict()
+        return Players
+
+    return "Error"
+
 #
 #\
 # \
@@ -168,6 +237,9 @@ def Results(  ):
 
 @app.route("/")
 def Porker_Run():
+
+    print( JSON_Functions.Open_JSON( "players.json" ) )
+
     return render_template('Porker_Run.html', title="Porker_Run", Colors=Colors)
 
 """
@@ -218,7 +290,7 @@ if __name__ == "__main__":
     # Add Porker_Run to the Multiprocessor
     ip = 'localhost'
     port = 5000
-    
+
     #Debug = False
     Debug = True
 

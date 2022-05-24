@@ -48,29 +48,55 @@
 
     <div class="g-height100 g-width100 g-centered-text g-FL" style="position:absolute">
 
-        <img class="g-height100 g-width100 g-FL" src="{{url_for('static', filename='images/Logo_Sub.jpg')}}" alt="Logo">
-        <div class="g-height100 g-width100 g-centered-text g-FL" style="position:absolute">
-            <div class="g-height25 g-width100 g-FL">
-
-            </div>
-
-            <div class="g-height50 g-width100 g-FL">
-
-                <div class="g-height100 g-width10 g-FL">
-                    <!-- Buffer Left -->
-                </div>
-
-                <div class="g-height100 g-width80 g-responsive-text-3 g-border-color-white g-text-white g-FL" onclick="Hello_World()">
-                    {{ title }}
-                </div>
-                <div class="g-height100 g-width10 g-FL">
-                    <!-- Buffer Right -->
-                </div>
-
-            </div>
+      <img class="g-height100 g-width100 g-FL" src="{{url_for('static', filename='images/Logo_Sub.jpg')}}" alt="Logo">
+      <div class="g-height100 g-width100 g-centered-text g-FL" style="position:absolute">
+        <div class="g-height2 g-width100  g-text-centered g-text-yellow g-responsive-text-5 g-FL">
 
         </div>
-    </div>
+        <div class="g-height8 g-width100  g-text-centered g-text-yellow g-responsive-text-5 g-FL">
+            PORKER RUN 2022
+        </div>
+        <div class="g-height90 g-width100 g-FL">
+          <div class="g-height100 g-width50  g-FL">
+            <div class="g-height10 g-width100  g-FL">
+              <div class="g-height25 g-width100 g-FL ">
+
+              </div>
+              <div class="g-height50 g-width20 g-FL">
+
+              </div>
+              <input class="g-height50 g-width20 g-FL" type="text" id="Player_Name" placeholder="Player Name" required>
+              <div class="g-height50 g-width5 g-FL ">
+                Paid
+                <input class="g-height50 g-width50" type="checkbox" id="Player_Paid">
+              </div>
+              <button class="g-height50 g-width15 g-FL" type="button" name="button" onclick="Add_Player( )"> Add Player </button>
+              <div class="g-height50 g-width5 g-FL ">
+              </div>
+              <button class="g-height50 g-width15 g-FL" type="button" name="button" onclick="Remove_Player( )"> Remove_Player </button>
+            </div>
+            <div class="g-height5 g-width100 g-FL">
+            </div>
+            <div class="g-height85 g-width5 g-FL">
+            </div>
+            <div id="Play_Info_Area" class="g-height80 g-width90 g-border-color-white g-FL">
+              TODO: Add Play viewer
+            </div>
+          </div>
+          <div class="g-height100 g-width50  g-FL">
+            <div class="g-height5 g-width100 g-FL">
+            </div>
+            <div class="g-height90 g-width5 g-FL">
+            </div>
+            <div class="g-height90 g-width90 g-border-color-white g-FL">
+            TODO: Add Leaderboard here
+            </div>
+          </div>
+        </div>
+        <!-- <input class="g-height25 g-width50 g-FL" type="text" id="Player_Name_Remove" placeholder="Player Name" required>
+        <button class="g-height25 g-width50 g-FL" type="button" name="button" onclick="Remove_Player( )"> Remove_Player </button> -->
+
+      </div>
 
     <script>
                             // Local Javascript

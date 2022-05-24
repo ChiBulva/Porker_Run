@@ -1,0 +1,19 @@
+{
+    "Players": [
+        {
+            "name": "d",
+            "paid": false,
+            "hand": ""
+        },
+        {
+            "name": "Hello",
+            "paid": true,
+            "hand": ""
+        },
+        {
+            "name": "t",
+            "paid": true,
+            "hand": ""
+        }
+    ]
+}
