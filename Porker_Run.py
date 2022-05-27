@@ -18,6 +18,7 @@ import multiprocessing
 #import scripts.Example.Example_Script as Example_Script
 #<++| Import Hooks |++>
 import scripts.File_IO.JSON_Functions.JSON_Functions as JSON_Functions
+import scripts.File_IO.CSV_Functions.CSV_Functions as CSV_Functions
 
 #
 #\
@@ -115,7 +116,18 @@ def Add_Hand(  ):
         JSON_Info = request.get_json()
         print( JSON_Info )
         #ARG_Info = request.args.to_dict()
-        return JSON_Functions.Add_Hand( JSON_Info[ "Player_Name" ] )
+
+        Player_Name = JSON_Info[ "Player_Name" ]
+        Hand = JSON_Info[ "Hand" ]
+
+        Rank, Hand_Name = CSV_Functions.Eval_Hand( Hand )
+
+        #CSV_Functions.Fix_Data(  )
+        JSON_Functions.Update_Player( Player_Name, Hand, Rank, Hand_Name )
+
+        # Update Player OBJ
+        return "Success!!!"
+
 
     return "Error"
 
@@ -167,6 +179,18 @@ def Get_Players(  ):
 
     if request.method == "POST":
         Players = JSON_Functions.Get_Players(  )
+        print( Players )
+        #ARG_Info = request.args.to_dict()
+        return Players
+
+    return "Error"
+
+@app.route("/Get_Leaders", methods=['POST'])
+def Get_Leaders(  ):
+    print( "---- Get_Leaders( ) Start ----" )
+
+    if request.method == "POST":
+        Players = JSON_Functions.Get_Leaders(  )
         print( Players )
         #ARG_Info = request.args.to_dict()
         return Players

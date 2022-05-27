@@ -1,0 +1,32 @@
+{
+    "Players": [
+        {
+            "name": "hello Buy",
+            "paid": true,
+            "hand": "AD KD QD JD TD",
+            "rank": "1",
+            "hand_name": "Royal Flush  "
+        },
+        {
+            "name": "Hello2",
+            "paid": true,
+            "hand": "AD 7D 8D QD ?",
+            "rank": "6439",
+            "hand_name": "Ace-High   "
+        },
+        {
+            "name": "sss",
+            "paid": true,
+            "hand": "AD TD QD 7D 8D",
+            "rank": "530",
+            "hand_name": "Ace-High Flush  "
+        },
+        {
+            "name": "sssdds",
+            "paid": true,
+            "hand": "2D 2D 2H 3C 4C",
+            "rank": 2467,
+            "hand_name": "Three Deuces  "
+        }
+    ]
+}

@@ -44,9 +44,9 @@ function Add_New_Player_From_Server( Player, Paid ) {
 
             }
             else{
-              alert( Results )
+              //alert( Results )
             }
-            Get_Players(  );
+            Query_Players(  );
         }
     });
 }
@@ -75,9 +75,30 @@ function Remove_Player_From_Server( Player ) {
             else{
               alert( Results )
             }
-            Get_Players(  );
+            Query_Players(  );
         }
     });
+}
+
+function Get_Leaders( ) {
+  $.ajax({
+      type: 'POST',
+      url: "/Get_Leaders",
+      contentType: "application/json",
+      //data: JSON.stringify( JSON_Data ),
+      success: function (Results) {
+        console.log( "Results!!!" )
+        console.log( Results )
+        console.log( "Results!!!" )
+        $( "#Leaderboard_Area" ).empty();
+        Count = 0
+        for ( Player in Results[ "Players" ] ) {
+          $( "#Leaderboard_Area" ).append( "<div class='g-width5 g-height5 g-FL'>#" + ( Count + 1 ) + "</div><div class='g-width30 g-height5 g-FL'>" + Results[ "Players" ][ Count ]['name'] + "</div><div class='g-width35 g-height5 g-FL'>" + Results[ "Players" ][ Count ]['hand'] + "</div><div class='g-width30 g-height5 g-FL'>" + Results[ "Players" ][ Count ]['hand_name'] + "</div>" );
+          Count += 1
+        }
+
+      }
+  });
 }
 
 function Get_Players(  ) {
@@ -89,11 +110,12 @@ function Get_Players(  ) {
       //data: JSON.stringify( JSON_Data ),
       success: function (Results) {
           $( "#Play_Info_Area" ).empty();
+          Count = 1
           for ( Player in Results[ "Players" ] ) {
             console.log( "Player" )
-            HTML = "<div class='g-width100 g-height5 g-blue g-FL' >"
+            HTML = "<div class='g-width100 g-height5 g-lightgray g-FL' >"
 
-            HTML += "<div class='g-width45 g-height100 g-red g-FL' onclick='Add_Name( this.innerHTML )'>" + Results[ "Players" ][ Player ][ "name" ] + "</div>"
+            HTML += "<div id='Player_User_" + Count + "' class='g-width45 g-height100 g-FL' onclick='Add_Name( this.innerHTML )'>" + Results[ "Players" ][ Player ][ "name" ] + "</div>"
 
             if( Results[ "Players" ][ Player ][ "paid" ] ) {
               // User has paid
@@ -102,12 +124,12 @@ function Get_Players(  ) {
               if( Results[ "Players" ][ Player ][ "hand" ] == "" ){
 
                 // Ask to add a users hand
-                HTML += "<button class='g-width48 g-height100 g-blue g-FR' onclick=\"Add_Hand(\'" + Results[ "Players" ][ Player ][ "name" ] + "\')\"/>Click to add Hand</button>"
+                HTML += "<button id='User_" + Count + "' class='g-width48 g-height100 g-lightgreen g-text-white g-FR' onclick=\"Add_New_Hand(\'" + Results[ "Players" ][ Player ][ "name" ] + "\', 'User_" + Count + "' )\"/>Click to add Hand</button><div class='g-width48 g-height100 g-FR' style='display:none' id='Input_Container_User_" + Count + "'><input id='Input_User_" + Count + "' class='g-width85 g-height100 g-FL' placeholder=' Type Hand here ...' /><button class='g-width15 g-height100 g-green g-text-white g-FL' onclick=\"Add_Hand( 'User_" + Count + "' )\" >Add</button></div>"
               }
               else{
-
                 // User should show up on leaderboard
-                HTML += "<button class='g-width48 g-yellow g-height100 g-FR'>" + Results[ "Players" ][ Player ][ "hand" ] + "</button>"
+                HTML += "<button id='User_" + Count + "' class='g-width48 g-yellow g-height100 g-FR' onclick=\"Add_New_Hand(\'" + Results[ "Players" ][ Player ][ "name" ] + "\', 'User_" + Count + "' )\"/>" + Results[ "Players" ][ Player ][ "hand" ] + "</button><div class='g-width48 g-height100 g-FR' style='display:none' id='Input_Container_User_" + Count + "'><input id='Input_User_" + Count + "' class='g-width85 g-height100 g-FL' placeholder=' Type Hand here ...' /><button class='g-width15 g-height100 g-green g-text-white g-FL' onclick=\"Add_Hand( 'User_" + Count + "' )\" >Add</button></div>"
+
               }
             }
             else{
@@ -115,7 +137,7 @@ function Get_Players(  ) {
               HTML += "<input type='checkbox' class='g-width5 g-height90 g-FL' onchange=\"Paid_Toggle(\'" + Results[ "Players" ][ Player ][ "name" ] + "\')\"/>"
 
               // Ask the user to pay
-              HTML += "<button class='g-width48 g-height100 g-white g-text-red g-FR'>You'll need to pay</button>"
+              HTML += "<div class='g-width48 g-height100 g-white g-text-red g-FR'>You'll need to pay</div>"
             }
             //HTML += "<div class='g-width33- g-height100 g-red g-FL'>" + Results[ "Players" ][ Player ][ "hand" ] + "</div>"
             //HTML += "<input class='g-width20 g-height100 g-FL'>" + Results[ "Players" ][ Player ][ "paid" ]
@@ -128,6 +150,7 @@ function Get_Players(  ) {
 
 
             $( "#Play_Info_Area" ).append( HTML );
+            Count += 1
           }
       }
   });
@@ -147,7 +170,7 @@ function Paid_Toggle_From_Server( Player ) {
         data: JSON.stringify( JSON_Data ),
         success: function (Results) {
           console.log( Results );
-          Get_Players(  );
+          Query_Players(  );
         }
     });
 }
@@ -160,13 +183,15 @@ function Paid_Toggle( Player ) {
 
 function Query_Players(  ){
   Get_Players(  );
+  Get_Leaders();
   //Assign_Player_HTML( Get_Players(  ) )
 }
 
-function Add_Hand_From_Server( Player ) {
+function Add_Hand_From_Server( Player, Hand ) {
 
     JSON_Data = {
-      "Player_Name": Player
+      "Player_Name": Player,
+      "Hand": Hand
     }
 
     $.ajax({
@@ -176,12 +201,25 @@ function Add_Hand_From_Server( Player ) {
         data: JSON.stringify( JSON_Data ),
         success: function (Results) {
           console.log( Results );
+          Query_Players(  );
         }
     });
 }
 
-function Add_Hand( Player ) {
-    Add_Hand_From_Server( Player );
+function Add_Hand( User_ID ) {
+  Player = $("#Player_" + User_ID )[0].innerHTML
+  Hand = $("#Input_" + User_ID )[0].value
+
+  console.log(Player,Hand)
+
+  Add_Hand_From_Server( Player, Hand );
+}
+
+function Add_New_Hand( Player_Name, DIV_ID ){
+  console.log( $("#" + DIV_ID )[0] )
+  console.log( $("#Input_" + DIV_ID )[0] )
+  $("#Input_Container_" + DIV_ID ).show()
+  $("#" + DIV_ID ).hide()
 }
 
 function Add_Name( Player_Name ) {
